@@ -1,0 +1,5 @@
+# Mazingira-Tracker
+
+This project seeks to raise awareness about the critical issue of biodiversity loss, a challenge that affects ecosystems, economies, and communities worldwide. By providing accessible information and resources, we aim to educate citizens about the importance of biodiversity and its direct impact on their local environments.
+
+Through interactive tools and engaging content, we will empower individuals to better understand the diverse species and habitats around them. This knowledge will inspire them to make informed, conscious decisions that promote conservation and sustainability in their daily lives. Ultimately, our goal is to foster a sense of stewardship for the planet, encouraging actions that contribute to a healthier and more sustainable future for all. By connecting people to their environment, we can collectively work towards preserving biodiversity for generations to come.
