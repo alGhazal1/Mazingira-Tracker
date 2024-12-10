@@ -42,27 +42,17 @@ app.use(express.static(path.join(__dirname, 'Mazigira-Tracker')));
 
 //routes
 app.get('/', (req, res)=>{
-    const biodata = req.body;
     res.sendfile('index.html')
 });
 
-app.get('/test', (req, res)=>{
-    
-    let count=0
-
-    res.send({count})
-});
-
-// app.post('/test', (req, res)=>{
-//     ++ count;
-//     res.send({count})
-// });
-
-
-app.get('/species', async (req, res)=>{
+app.get('/species', (req, res)=> {
+    const speciesPath= path.resolve(__dirname,'species.html')
+    res.sendFile(speciesPath);
+})
+app.get('/species1', async (req, res)=>{
 try {
     const response=await fetch('https://api.gbif.org/v1/occurrence/search?limit=10');
-    const biodata= await response.json
+    const biodata= await response.json();
     res.json(biodata);
     }
 catch(err){
