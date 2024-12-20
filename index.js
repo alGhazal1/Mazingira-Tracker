@@ -56,7 +56,7 @@ app.get('/', (req, res)=>{
 
 app.get('/species', (req, res)=> {
     const speciesPath= path.resolve(__dirname,'views','index.ejs')
-    res.sendFile(speciesPath);
+    res.render(speciesPath);
 })
 app.get('/species1', async (req, res)=>{
 try {
@@ -80,8 +80,9 @@ try {
         })?.identifier || 'No URL available'
  
     }))
+    console.log(extractedData)
     // res.json(extractedData);
-    res.render('index.ejs', {data: extractedData})
+     res.render('index', {data: extractedData})
     }
 catch(error){
     console.error("Error fetching biodata", error)

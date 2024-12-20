@@ -17,7 +17,7 @@
             background-color: #f9f9f9;
             border-radius: 8px;
         }
-        h1 {
+        h2 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -37,81 +37,92 @@
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>Species</h1>
+    <h1>Biodiversity Information Page</h1>
     <p>Discover plant and animal species in your location</p>
+    <br>
+    
+    <% if (data && data.length > 0) { %>
+        <% data.forEach(item => { %>
 
-    <!-- Display scientific name -->
-    <div class="item-info">
-        <label>Scientific Name:</label>
-        <p><%= data.scientificName || 'N/A' %></p>
-    </div>
+            <div class="container">
+                <h2><%= item.genericName || 'N/A' %></h2>
 
-    <!-- Display species -->
-    <div class="item-info">
-        <label>Species:</label>
-        <p><%= data.species || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>Scientific Name:</label>
+                    <p><%= item.scientificName || 'N/A' %></p>
+                </div>
 
-    <!-- Display generic name -->
-    <div class="item-info">
-        <label>Generic Name:</label>
-        <p><%= data.genericName || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>Species:</label>
+                    <p><%= item.species || 'N/A' %></p>
+                </div>
 
-    <!-- Display date identified -->
-    <div class="item-info">
-        <label>Date Identified:</label>
-        <p><%= data.dateIdentified || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>Generic Name:</label>
+                    <p><%= item.genericName || 'N/A' %></p>
+                </div>
 
-    <!-- Display latitude -->
-    <div class="item-info">
-        <label>Decimal Latitude:</label>
-        <p><%= data.decimalLatitude || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>Date Identified:</label>
+                    <p><%= item.dateIdentified || 'N/A' %></p>
+                </div>
 
-    <!-- Display longitude -->
-    <div class="item-info">
-        <label>Decimal Longitude:</label>
-        <p><%= data.decimalLongitude || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>Decimal Latitude:</label>
+                    <p><%= item.decimalLatitude || 'N/A' %></p>
+                </div>
 
-    <!-- Display continent -->
-    <div class="item-info">
-        <label>Continent:</label>
-        <p><%= data.continent || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>Decimal Longitude:</label>
+                    <p><%= item.decimalLongitude || 'N/A' %></p>
+                </div>
 
-    <!-- Display state/province -->
-    <div class="item-info">
-        <label>State/Province:</label>
-        <p><%= data.stateProvince || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>Continent:</label>
+                    <p><%= item.continent || 'N/A' %></p>
+                </div>
 
-    <!-- Display event date -->
-    <div class="item-info">
-        <label>Event Date:</label>
-        <p><%= data.eventDate || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>State/Province:</label>
+                    <p><%= item.stateProvince || 'N/A' %></p>
+                </div>
 
-    <!-- Display locality -->
-    <div class="item-info">
-        <label>Verbatim Locality:</label>
-        <p><%= data.verbatimLocality || 'N/A' %></p>
-    </div>
+                
+                <div class="item-info">
+                    <label>Event Date:</label>
+                    <p><%= item.eventDate || 'N/A' %></p>
+                </div>
 
-    <!-- Display media URL (or show "No URL available") -->
-    <div class="item-info">
-        <label>Media URL:</label>
-        <% if (data.mediaUrl !== 'No URL available') { %>
-            <p><a href="<%= data.mediaUrl %>" target="_blank" class="media-link">View Image</a></p>
-        <% } else { %>
-            <p class="no-media"><%= data.mediaUrl %></p>
-        <% } %>
-    </div>
-</div>
+                
+                <div class="item-info">
+                    <label>Verbatim Locality:</label>
+                    <p><%= item.verbatimLocality || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Media URL:</label>
+                    <% if (item.mediaUrl !== 'No URL available') { %>
+                        <p><a href="<%= item.mediaUrl %>" target="_blank" class="media-link">View Image</a></p>
+                    <% } else { %>
+                        <p class="no-media">No image available</p>
+                    <% } %>
+                </div>
+            </div>
+
+        <% }) %>
+    <% } else { %>
+        <p>No data available.</p>
+    <% } %>
 
 </body>
+
 </html>
