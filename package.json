@@ -6,5 +6,24 @@
     "express": "^4.21.2",
     "mysql2": "^3.11.5",
     "node-fetch": "^3.3.2"
-  }
+  },
+  "name": "mazingira-tracker",
+  "version": "1.0.0",
+  "description": "This project seeks to raise awareness about the critical issue of biodiversity loss, a challenge that affects ecosystems, economies, and communities worldwide. By providing accessible information and resources, we aim to educate citizens about the importance of biodiversity and its direct impact on their local environments.",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alGhazal1/Mazingira-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alGhazal1/Mazingira-Tracker/issues"
+  },
+  "homepage": "https://github.com/alGhazal1/Mazingira-Tracker#readme"
 }

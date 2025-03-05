@@ -55,12 +55,23 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/species', (req, res)=> {
-    const speciesPath= path.resolve(__dirname,'views','index.ejs')
-    res.render(speciesPath);
+    res.render('local');
 })
+
+app.get('/user', (req, res)=> {
+    res.render('user_home');
+})
+
 app.get('/species1', async (req, res)=>{
 try {
-    const response=await fetch('https://api.gbif.org/v1/occurrence/search?limit=10');
+    const latitude = req.query.latitude;
+    const longitude = req.query.longitude;
+    if (!latitude ||!longitude) {
+    res.status(400).json({error: 'latitude and longitude required'})
+    };
+
+    const response = await fetch(`https://api.gbif.org/v1/occurrence/search?decimalLatitude=${latitude}&decimalLongitude=${longitude}&within=100`);
+
     const results= await response.json();
     const biodata = results.results;
     const extractedData = biodata.map((item)=>(
@@ -82,7 +93,7 @@ try {
     }))
     console.log(extractedData)
     // res.json(extractedData);
-     res.render('index', {data: extractedData})
+     res.render('local', {data: extractedData})
     }
 catch(error){
     console.error("Error fetching biodata", error)

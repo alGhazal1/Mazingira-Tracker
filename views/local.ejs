@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mazingira Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .item-info {
+            margin-bottom: 15px;
+        }
+        .item-info label {
+            font-weight: bold;
+        }
+        .media-link {
+            color: blue;
+            text-decoration: underline;
+        }
+        .no-media {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Biodiversity Information Page</h1>
+    <p>Discover plant and animal species in your location</p>
+    <br>
+    
+    <% if (data && data.length > 0) { %>
+        <% data.forEach(item => { %>
+
+            <div class="container">
+                <h2><%= item.genericName || 'N/A' %></h2>
+
+                
+                <div class="item-info">
+                    <label>Scientific Name:</label>
+                    <p><%= item.scientificName || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Species:</label>
+                    <p><%= item.species || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Generic Name:</label>
+                    <p><%= item.genericName || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Date Identified:</label>
+                    <p><%= item.dateIdentified || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Decimal Latitude:</label>
+                    <p><%= item.decimalLatitude || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Decimal Longitude:</label>
+                    <p><%= item.decimalLongitude || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Continent:</label>
+                    <p><%= item.continent || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>State/Province:</label>
+                    <p><%= item.stateProvince || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Event Date:</label>
+                    <p><%= item.eventDate || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Verbatim Locality:</label>
+                    <p><%= item.verbatimLocality || 'N/A' %></p>
+                </div>
+
+                
+                <div class="item-info">
+                    <label>Media URL:</label>
+                    <% if (item.mediaUrl !== 'No URL available') { %>
+                        <p><a href="<%= item.mediaUrl %>" target="_blank" class="media-link">View Image</a></p>
+                    <% } else { %>
+                        <p class="no-media">No image available</p>
+                    <% } %>
+                </div>
+            </div>
+
+        <% }) %>
+    <% } else { %>
+        <p>No data available.</p>
+    <% } %>
+
+</body>
+
+</html>
