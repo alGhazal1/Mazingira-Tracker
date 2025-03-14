@@ -47,11 +47,11 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true }));
 
 //Working directory
-app.use(express.static(path.join(__dirname, 'Mazigira-Tracker')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
 app.get('/', (req, res)=>{
-    res.render('index.ejs')
+    res.render('index')
 });
 
 app.get('/species', (req, res)=> {
