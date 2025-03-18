@@ -39,27 +39,21 @@ app.get('/user', (req, res)=> {
 
 app.get('/species', async (req, res)=>{
 try {
-    //const latitude = req.query.latitude;
-    //const longitude = req.query.longitude;
-    
-    //console.log(req.query.latitude)
-    //console.log(req.query.longitude)
-
-    const latitude = 0.1
-    const longitude = 37.5
-    console.log(latitude);
-    console.log(longitude);
-    if (!latitude ||!longitude) {
+    const latitude = req.query.latitude;
+    const longitude = req.query.longitude;
+    console.log(req.query.latitude)
+    console.log(req.query.longitude)
+    if (!latitude || !longitude) {
     res.status(400).json({error: 'latitude and longitude required'})
     };
 
-    const response = await fetch('https://api.gbif.org/v1/occurrence/search?decimalLatitude=${latitude}&decimalLongitude=${longitude}&within=100');
+    const response = await fetch(`https://api.gbif.org/v1/occurrence/search?decimalLatitude=${latitude}&decimalLongitude=${longitude}&within=100`);
     if (!response.ok) {
         throw new Error('Failed to fetch data from Dataset');
     }
 
     const results= await response.json();
-    const biodata = results.result;
+    const biodata = results.results;
 
     const extractedData = biodata.map((item)=>(
         {
@@ -77,7 +71,7 @@ try {
     }));
 
     console.log(extractedData)
-    res.render('local', {data: extractedData})
+    res.render('local', {data: extractedData});
     }
 catch(error){
     console.error("Error fetching biodata", error)
