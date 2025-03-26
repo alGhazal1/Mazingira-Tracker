@@ -1,6 +1,8 @@
 //requirements
 const express = require('express');
-const path = require('path'); 
+const https = require('https');
+const path = require('path');
+const fs = require('fs')
 const dotenv = require('dotenv');
 const ejs = require('ejs');
 
@@ -11,6 +13,12 @@ const app = express();
 // configure environment
 dotenv.config();
 
+//Set up HTTPS
+const keyshash = {
+key: fs.readFileSync('key.pem'),
+cert: fs.readFileSync('cert.pem'),
+passphrase: process.env.PASSPHRASE
+};
 // Set view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -31,8 +39,9 @@ app.get('/getStarted', (req, res) =>{
 })
 
 app.get('/user', (req, res)=> {
-    res.render('user_home');
-})
+    const userLocation = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    res.render('user_home',{userLocation});
+});
 
 app.get('/species', async (req, res)=>{
 try {
@@ -79,8 +88,8 @@ catch(error){
 }})
 
 // Start the server
-const port = process.env.PORT || 5001 
-app.listen(port, () => {
-    console.log('Server running on port: port');
+const port = process.env.PORT || 5001
+https.createServer(keyshash, app).listen(port, () => {
+    console.log(`Server running on port: ${port}`);
 });
 

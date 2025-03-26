@@ -4,6 +4,7 @@
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "https": "^1.0.0",
     "mysql2": "^3.11.5",
     "node-fetch": "^3.3.2"
   },
@@ -24,5 +25,6 @@
   "bugs": {
     "url": "https://github.com/alGhazal1/Mazingira-Tracker/issues"
   },
-  "homepage": "https://github.com/alGhazal1/Mazingira-Tracker#readme"
+  "homepage": "https://github.com/alGhazal1/Mazingira-Tracker#readme",
+  "devDependencies": {}
 }
