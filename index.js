@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs')
 const dotenv = require('dotenv');
 const ejs = require('ejs');
-
+const geoip = require('geoip-lite')
 
 // Start app
 const app = express();
@@ -32,15 +32,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
 app.get('/', (req, res)=>{
-    res.render('index')
+//    res.render('index')
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const geo = geoip.lookup(ip);
+    if (geo) {
+    const userLocation = `${geo.city}, ${geo.region}, ${geo.country}`;
+    res.render('index',{userLocation});
+    } else {
+    res.render('index', {userLocation: 'Unknown'});
+    }
 });
 app.get('/getStarted', (req, res) =>{
     res.redirect('/species')
 })
 
 app.get('/user', (req, res)=> {
-    const userLocation = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const geo = geoip.lookup(ip);
+    if (geo) {
+    const userLocation = `${geo.city}, ${geo.region}, ${geo.country}`;
     res.render('user_home',{userLocation});
+    } else {
+    res.render('user_home', {userLocation: 'Unknown'});
+    }
 });
 
 app.get('/species', async (req, res)=>{
