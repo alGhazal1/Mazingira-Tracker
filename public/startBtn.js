@@ -2,7 +2,6 @@
 const getStarted = document.getElementById('getStartedButton')
 
 getStarted.addEventListener('click', function(e){
-   alert('Allow access to location?');
    if (navigator.geolocation){
       navigator.geolocation.getCurrentPosition(
           function(position) {
