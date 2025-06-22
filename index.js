@@ -30,11 +30,24 @@ app.use(express.urlencoded({extended: true }));
 //Working directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+//mock data
+const mockData = {
+    city: 'Nairobi',
+    region: 'Nairobi',
+    country: 'Kenya'
+}
+const useMockData = true;
+
 //routes
 app.get('/', (req, res)=>{
 //    res.render('index')
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    const geo = geoip.lookup(ip);
+    let geo;
+    if (useMockData) {
+        geo = mockData;
+    } else {
+        geo = geoip.lookup(ip);
+    }
     if (geo) {
     const userLocation = `${geo.city}, ${geo.region}, ${geo.country}`;
     res.render('index',{userLocation});
@@ -69,7 +82,7 @@ try {
     return res.status(400).json({error: 'latitude and longitude required'})
     };
 
-    const response = await fetch(`https://api.gbif.org/v1/occurrence/search?decimalLatitude=${latitude}&decimalLongitude=${longitude}&within=100`);
+    const response = await fetch(`https://api.gbif.org/v1/occurrence/search?decimalLatitude=${req.query.latitude}&decimalLongitude=${req.query.longitude}&within=100`);
     if (!response.ok) {
         throw new Error('Failed to fetch data from Dataset');
     }
@@ -102,7 +115,7 @@ catch(error){
 }})
 
 // Start the server
-const port = process.env.PORT || 5001
+const port = process.env.PORT || 5000
 https.createServer(keyshash, app).listen(port, () => {
     console.log(`Server running on port: ${port}`);
 });

@@ -4,10 +4,12 @@
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "expressjs": "^1.0.1",
     "geoip-lite": "^1.4.10",
     "https": "^1.0.0",
     "mysql2": "^3.11.5",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.10"
   },
   "name": "mazingira-tracker",
   "version": "1.0.0",
@@ -27,5 +29,6 @@
     "url": "https://github.com/alGhazal1/Mazingira-Tracker/issues"
   },
   "homepage": "https://github.com/alGhazal1/Mazingira-Tracker#readme",
+  "type": "commonjs",
   "devDependencies": {}
 }
